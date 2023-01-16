@@ -22,11 +22,7 @@ public class SaveManager : MonoBehaviour
 
     private Dictionary<StatistiqueGraph.StatistiqueType, List<float>> _statDictionary;
     private ParametrableValues _params;
-
-    public ParametrableValues GetParameters()
-    {
-        return _params;
-    }
+    private Dictionary<StatistiqueGraph.StatistiqueType, Vector2> _balance;
 
     private void Awake() {
         Debug.Log("Singleton awake");
@@ -38,8 +34,16 @@ public class SaveManager : MonoBehaviour
         }
 
         _params = new ParametrableValues();
-
         _statDictionary = new Dictionary<StatistiqueGraph.StatistiqueType, List<float>>();
+        _balance = new Dictionary<StatistiqueGraph.StatistiqueType, Vector2>();
+
+        InitDictionaries();
+
+        Load();
+    }
+
+    private void InitDictionaries()
+    {
         _statDictionary.Add(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY, new List<float>());
         _statDictionary.Add(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME, new List<float>());
         _statDictionary.Add(StatistiqueGraph.StatistiqueType.GAZ_ACCURACY, new List<float>());
@@ -48,47 +52,36 @@ public class SaveManager : MonoBehaviour
         _statDictionary.Add(StatistiqueGraph.StatistiqueType.NUMBER_MEMORY, new List<float>());
         _statDictionary.Add(StatistiqueGraph.StatistiqueType.LIGHT_MEMORY, new List<float>());
 
-        Load();
+        _balance.Add(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY, new Vector2(0.0f, 2.0f));
+        _balance.Add(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME, new Vector2(0.3f, 1.5f));
+        _balance.Add(StatistiqueGraph.StatistiqueType.GAZ_ACCURACY, new Vector2(1.0f, 5.0f));
+        _balance.Add(StatistiqueGraph.StatistiqueType.RUDDER_ACCURACY, new Vector2(1.0f, 5.0f));
+        _balance.Add(StatistiqueGraph.StatistiqueType.RUDDER_REACTION_TIME, new Vector2(0.3f, 2.0f));
+        _balance.Add(StatistiqueGraph.StatistiqueType.NUMBER_MEMORY, new Vector2(1.0f, 5.0f));
+        _balance.Add(StatistiqueGraph.StatistiqueType.LIGHT_MEMORY, new Vector2(1.0f, 5.0f));
     }
 
-    public int GetNumberSession()
-    {
-        return _statDictionary[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY].Count;
-    }
-
-    public Dictionary<StatistiqueGraph.StatistiqueType, List<float>> GetDict()
-    {
-        return _statDictionary;
-    }
-
-    private int i = 0;
-
-    public void Test()
-    {
-        foreach (var s in _statDictionary)
-            s.Value.Clear();
-        
-        int j = 0;
-        int r = Random.Range(0, 150);
-        foreach (var s in _statDictionary)
-        {
-            if (i == 0)
-            {
-                for (int k = 0; k < 9; ++k)
-                    s.Value.Add(Random.Range(0.0f, 1.0f));
-            }
-            else
-            {
-                for (int k = 0; k < r; ++k)
-                    s.Value.Add(Random.Range(0.0f, 1.0f));
-            }
-            // s.Value.Add(Random.Range(0.0f, 1.0f));
-        }
-        ++i;
-    }
+    public int GetNumberSession() { return _statDictionary[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY].Count; }
+    public Dictionary<StatistiqueGraph.StatistiqueType, List<float>> GetDict() { return _statDictionary; }
+    public Vector2 GetBalance(StatistiqueGraph.StatistiqueType balanceType) { return _balance[balanceType]; }
+    public ParametrableValues GetParameters() { return _params; }
 
     public void Load()
     {
+        if (SerializationManager.Exist("GlobalParameters"))
+        {
+            _params = (ParametrableValues)SerializationManager.Load("GlobalParameters");
+        }
+
+        if (SerializationManager.Exist("GraphData"))
+        {
+            _statDictionary = (Dictionary<StatistiqueGraph.StatistiqueType, List<float>>)SerializationManager.Load("GlobalParameters");
+        }
+
+        if (SerializationManager.Exist("Balancing"))
+        {
+            _balance = (Dictionary<StatistiqueGraph.StatistiqueType, Vector2>)SerializationManager.Load("GlobalParameters");
+        }
     }
 
     public void Save()

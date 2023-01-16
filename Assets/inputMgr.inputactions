@@ -518,14 +518,23 @@
             ]
         },
         {
-            "name": "PitchAndRoll",
+            "name": "Player",
             "id": "b1d9cd3c-1b6e-4c3e-b9b9-90e97fdef41a",
             "actions": [
                 {
-                    "name": "AxisMovement",
+                    "name": "PitchAndRoll",
                     "type": "Value",
                     "id": "165c9869-c347-4f73-ad3c-48ad2f687fc2",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Throttle",
+                    "type": "Value",
+                    "id": "a1f85890-dfb9-4904-851b-44507cd95e18",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -539,7 +548,7 @@
                     "interactions": "",
                     "processors": "InvertVector2(invertX=false)",
                     "groups": "",
-                    "action": "AxisMovement",
+                    "action": "PitchAndRoll",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -550,7 +559,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AxisMovement",
+                    "action": "PitchAndRoll",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -561,7 +570,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AxisMovement",
+                    "action": "PitchAndRoll",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -572,7 +581,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AxisMovement",
+                    "action": "PitchAndRoll",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -583,85 +592,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "AxisMovement",
+                    "action": "PitchAndRoll",
                     "isComposite": false,
                     "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "Rudder",
-            "id": "77870c6b-40ad-4013-a57b-9d3ad75015ab",
-            "actions": [
-                {
-                    "name": "Move",
-                    "type": "Value",
-                    "id": "0d7ab291-d955-43ca-afdb-ffedd001565f",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "e13dcf92-fe1b-41d4-9b6d-876118d2c802",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Throttle",
-            "id": "3c5235b3-3573-48b2-a0d1-f1322fce25d9",
-            "actions": [
-                {
-                    "name": "MoveThrottle",
-                    "type": "Value",
-                    "id": "18397f9b-379e-4bf6-bace-7dcb1f3bf54e",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "1D Axis",
-                    "id": "d851fe68-f7ed-45a5-813d-a1fa213dc54f",
-                    "path": "1DAxis",
+                    "id": "c17c0377-d43c-4bc4-b3f1-6f6a9b1b64a9",
+                    "path": "1DAxis(minValue=0)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveThrottle",
+                    "action": "Throttle",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "d217360c-2f6e-4fc9-9011-d8f90ebbf54e",
-                    "path": "<HID::Thrustmaster Throttle - HOTAS Warthog>/stick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveThrottle",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "positive",
-                    "id": "80fbae5d-deb3-4477-ac2a-fb50a1a16b64",
-                    "path": "<HID::Thrustmaster Throttle - HOTAS Warthog>/stick/up",
+                    "id": "1ccb9d1f-36ea-499d-8a0f-a9f121e38a02",
+                    "path": "<HID::Thrustmaster Throttle - HOTAS Warthog>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveThrottle",
+                    "action": "Throttle",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

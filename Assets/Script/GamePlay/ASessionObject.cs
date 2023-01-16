@@ -10,7 +10,7 @@ public abstract class ASessionObject : MonoBehaviour
     public abstract void StartSession();
     public abstract void StopSession();
     public abstract void SaveSessionData();
-    public bool CanRun() { return _inPause && _started; }
+    public bool CanRun() { return !_inPause && _started; }
     public bool Pause() { return _started ? _inPause = true : false; }
     public void Resume() { _inPause = false; }
 }

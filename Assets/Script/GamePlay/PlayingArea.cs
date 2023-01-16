@@ -30,6 +30,6 @@ public class PlayingArea : MonoBehaviour
         var bounds = GetAreaBounds();
         _target.transform.position = new Vector3(_area.transform.position.x, _area.transform.position.y, _target.transform.position.z);
         _pedals.transform.position = new Vector3(_area.transform.position.x, _area.transform.position.y, _pedals.transform.position.z);
-            // _pitchAndRoll.transform.position = new Vector3(_area.transform.position.x, _area.transform.position.y, _pitchAndRoll.transform.position.z);
+        _pitchAndRoll.transform.position = new Vector3(_area.transform.position.x, _area.transform.position.y - _pitchAndRoll.GetComponent<PitchAndRoll>().GetSpriteBounds().size.y * 0.5f, _pitchAndRoll.transform.position.z);
     }    
 }

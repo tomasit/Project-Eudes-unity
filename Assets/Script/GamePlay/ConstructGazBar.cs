@@ -47,9 +47,14 @@ public class ConstructGazBar : MonoBehaviour
         inter2.GetComponent<SpriteRenderer>().color = _colors[1];
         inter2.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
-        var arr = (GameObject)Instantiate(_arrow, _parent.transform);
-        var b4 = arr.GetComponent<SpriteRenderer>().bounds.size;
-        arr.transform.localScale = new Vector3(b2.x / b4.x, b2.y / b4.y, b2.z / b4.z);
+        var b4 = _arrow.GetComponent<SpriteRenderer>().bounds.size;
+        _arrow.transform.localScale = new Vector3(b2.x / b4.x, b2.y / b4.y, b2.z / b4.z);
+        ResetArrowPosition();
+    }
+
+    public void ResetArrowPosition()
+    {
+        _arrow.transform.position = this.transform.position;
     }
 
     public float GetTolerance()

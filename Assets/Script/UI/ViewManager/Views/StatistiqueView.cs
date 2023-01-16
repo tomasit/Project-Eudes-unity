@@ -9,8 +9,6 @@ public class StatistiqueView : AView
 
     public override void Show()
     {
-        SaveManager.DataInstance.Test();
-
         base.Show();
 
         if (!_graph._isInitialize)

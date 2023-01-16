@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4543616}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.79, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4954,7 +4954,7 @@ GameObject:
   - component: {fileID: 480923157}
   - component: {fileID: 480923158}
   m_Layer: 0
-  m_Name: Target
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5628,7 +5628,7 @@ Transform:
   m_GameObject: {fileID: 558056589}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 0.1, z: 1}
+  m_LocalScale: {x: 5, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 705929539}
@@ -8229,13 +8229,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cf54b733022264582dece1c125a9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hasStarted: 0
   _inPause: 0
-  _isDemo: 0
+  _started: 0
+  _demoObject: 0
   _rotationSpeed: 100
   _movementSpeed: 20
   _clampToRotation: 90
   _sprite: {fileID: 558056591}
+  _target: {fileID: 4543616}
 --- !u!1 &709829490
 GameObject:
   m_ObjectHideFlags: 0
@@ -15602,7 +15603,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475102742}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalPosition: {x: 0, y: -0.24, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19772,7 +19773,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1833684804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20671,7 +20672,7 @@ MonoBehaviour:
   _area: {fileID: 1890250626}
   _target: {fileID: 4543616}
   _pedals: {fileID: 2074413117}
-  _pitchAndRoll: {fileID: 0}
+  _pitchAndRoll: {fileID: 705929538}
   _gaz: {fileID: 0}
 --- !u!1 &1919263727
 GameObject:
@@ -22615,9 +22616,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6d7a69d3cb187438131e926aebf223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inPause: 0
+  _started: 0
+  _demoObject: 0
   _pedals: {fileID: 1475102743}
   _target: {fileID: 4543616}
-  _startSession: 0
 --- !u!1 &2080565570
 GameObject:
   m_ObjectHideFlags: 0
