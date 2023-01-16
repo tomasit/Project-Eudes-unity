@@ -2,34 +2,6 @@
     "name": "inputMgr",
     "maps": [
         {
-            "name": "Player",
-            "id": "b85ddba4-dcf2-46ba-b0c9-f47e10782e84",
-            "actions": [
-                {
-                    "name": "PitchAndRoll",
-                    "type": "Value",
-                    "id": "1bdc75eb-fb11-4dc1-a207-337927200cb2",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "f5e43963-1564-4c17-8e8f-3d24e44cd18a",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "PitchAndRoll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
             "name": "UI",
             "id": "ae0b6779-fc36-4e53-a2e3-87bb6380de85",
             "actions": [
@@ -550,10 +522,10 @@
             "id": "b1d9cd3c-1b6e-4c3e-b9b9-90e97fdef41a",
             "actions": [
                 {
-                    "name": "Move",
+                    "name": "AxisMovement",
                     "type": "Value",
                     "id": "165c9869-c347-4f73-ad3c-48ad2f687fc2",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -561,15 +533,59 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "0e4e5aab-d279-49ef-9510-6a4882b86bc3",
-                    "path": "",
+                    "name": "AxisVector",
+                    "id": "f15423b4-52f1-4c86-a844-a00b2584f2ec",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "InvertVector2(invertX=false)",
+                    "groups": "",
+                    "action": "AxisMovement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "50f4e9ef-8eb1-47ed-9f80-e5865cd314ce",
+                    "path": "<HID::Thustmaster Joystick - HOTAS Warthog>/stick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick",
-                    "action": "Move",
+                    "groups": "",
+                    "action": "AxisMovement",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "8d1858b2-5fb3-49d3-b33b-c65c6181469e",
+                    "path": "<HID::Thustmaster Joystick - HOTAS Warthog>/stick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AxisMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "e1f3d4ba-f071-4903-9b41-c16fb5f1cdab",
+                    "path": "<HID::Thustmaster Joystick - HOTAS Warthog>/stick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AxisMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "96d29f04-c655-4e71-9f5a-48568f629f4f",
+                    "path": "<HID::Thustmaster Joystick - HOTAS Warthog>/stick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AxisMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
@@ -602,30 +618,52 @@
             ]
         },
         {
-            "name": "New action map",
+            "name": "Throttle",
             "id": "3c5235b3-3573-48b2-a0d1-f1322fce25d9",
             "actions": [
                 {
-                    "name": "New action",
-                    "type": "Button",
+                    "name": "MoveThrottle",
+                    "type": "Value",
                     "id": "18397f9b-379e-4bf6-bace-7dcb1f3bf54e",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "e42fb897-0946-4ba5-b790-7e7a9afc56db",
-                    "path": "",
+                    "name": "1D Axis",
+                    "id": "d851fe68-f7ed-45a5-813d-a1fa213dc54f",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
+                    "action": "MoveThrottle",
+                    "isComposite": true,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "d217360c-2f6e-4fc9-9011-d8f90ebbf54e",
+                    "path": "<HID::Thrustmaster Throttle - HOTAS Warthog>/stick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveThrottle",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "80fbae5d-deb3-4477-ac2a-fb50a1a16b64",
+                    "path": "<HID::Thrustmaster Throttle - HOTAS Warthog>/stick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveThrottle",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

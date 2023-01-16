@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-// TODO : clamp position into playing area
-// move position each time going on the main loop
-// connect with Input
 public class Pedals : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _pedals;

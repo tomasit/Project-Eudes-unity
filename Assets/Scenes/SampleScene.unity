@@ -2938,7 +2938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &328530970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5627,7 +5627,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558056589}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.05, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 8, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8193,13 +8193,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 705929539}
+  - component: {fileID: 705929540}
   m_Layer: 0
   m_Name: PitchAndRoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &705929539
 Transform:
   m_ObjectHideFlags: 0
@@ -8208,7 +8209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705929538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.1, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8216,6 +8217,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &705929540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705929538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42cf54b733022264582dece1c125a9b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hasStarted: 0
+  _inPause: 0
+  _isDemo: 0
+  _rotationSpeed: 100
+  _movementSpeed: 20
+  _clampToRotation: 90
+  _sprite: {fileID: 558056591}
 --- !u!1 &709829490
 GameObject:
   m_ObjectHideFlags: 0
@@ -9999,7 +10019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &869965432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10662,7 +10682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: cf697a79a2c84054fa1a997c33b9fd5b, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -10674,22 +10694,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 328530969}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 1bdc75eb-fb11-4dc1-a207-337927200cb2
-    m_ActionName: Player/PitchAndRoll
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: ce2c14cf-41fd-44db-aa4d-d2dd1174eab4
@@ -10730,9 +10734,33 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: bef90264-80e6-4789-963e-c07f32d64d51
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 705929540}
+        m_TargetAssemblyTypeName: PitchAndRoll, Assembly-CSharp
+        m_MethodName: Move
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 165c9869-c347-4f73-ad3c-48ad2f687fc2
+    m_ActionName: PitchAndRoll/Move
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0d7ab291-d955-43ca-afdb-ffedd001565f
+    m_ActionName: Rudder/Move
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 18397f9b-379e-4bf6-bace-7dcb1f3bf54e
+    m_ActionName: New action map/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: b1d9cd3c-1b6e-4c3e-b9b9-90e97fdef41a
+  m_DefaultActionMap: PitchAndRoll
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!4 &944527801
