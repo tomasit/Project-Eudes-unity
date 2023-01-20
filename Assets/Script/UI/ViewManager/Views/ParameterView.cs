@@ -5,10 +5,10 @@ using TMPro;
 public class ParameterView : AView 
 {
     [SerializeField] private AssignInputValue[] _input;
-    
+    [HideInInspector] public ParametrableValues _tmpSettings;
     public override void Show()
     {
-        // GetComponent<SpawnPopup>().DeletePopup();
+        _tmpSettings = SaveManager.DataInstance.GetParameters();
         WriteDefault();
         base.Show();
     }
@@ -27,6 +27,7 @@ public class ParameterView : AView
         {
             input.AssignValue();
         }
+        SaveManager.DataInstance.SetParameters(_tmpSettings);
     }
 
     public void InteractInputField(bool interact)

@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SessionManager : MonoBehaviour
 {
     [SerializeField] private ASessionObject[] _objectsToRecord;
     [SerializeField] private bool _isRunning = false;
+    private bool _isPaused = false;
     private float _timer = 0.0f;
 
     public bool tkt = false;
+
+    public bool IsRunning()
+    {
+        return _isRunning;
+    }
 
     public void StartSession()
     {
@@ -16,6 +23,7 @@ public class SessionManager : MonoBehaviour
             o.StartSession();
         _timer = 0.0f;
         _isRunning = true;
+        _isPaused = false;
     }
 
     public void StopSession()
@@ -30,14 +38,19 @@ public class SessionManager : MonoBehaviour
     {
         foreach (var o in _objectsToRecord)
             o.Pause();
-        _isRunning = false;
+        _isPaused = true;
     }
 
     public void Resume()
     {
         foreach (var o in _objectsToRecord)
             o.Resume();
-        _isRunning = true;
+        _isPaused = false;
+    }
+
+    private bool CanRun()
+    {
+        return !_isPaused && _isRunning;
     }
 
     private void Update()
@@ -48,7 +61,7 @@ public class SessionManager : MonoBehaviour
             tkt = false;
         }
 
-        if (!_isRunning)
+        if (!CanRun())
             return;
 
         if (_timer >= SaveManager.DataInstance.GetParameters()._sessionDuration * 60f)
@@ -56,6 +69,8 @@ public class SessionManager : MonoBehaviour
             StopSession();
             // Pause();
             SaveManager.DataInstance.SaveGraph();
+
+            SceneManager.LoadScene("MainMenu");
         }
 
         _timer += Time.deltaTime;

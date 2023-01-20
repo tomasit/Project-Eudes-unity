@@ -47,6 +47,11 @@ public class SaveManager : MonoBehaviour
         _params = new ParametrableValues();
     }
 
+    public void SetParameters(ParametrableValues settings)
+    {
+        _params = settings;
+    }
+
     private void InitDictionaries()
     {
         _statDictionary.Add(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY, new List<float>());

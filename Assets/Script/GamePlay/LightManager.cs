@@ -20,21 +20,29 @@ public class LightManager : ASessionObject
     private int _trueLightNb = 0;
     private int _playerResponse;
     public AutoLight test;
-    
+    private bool _isInstantiate = false;    
 
     private void Start()
     {
-        _frequences = new List<float>();
-        _trueLight = new List<bool>();
-        
+        if (!_isInstantiate)
+        {
+            _frequences = new List<float>();
+            _trueLight = new List<bool>();
+            _isInstantiate = true;
+        }
+
         foreach (var light in _lights)
             light.LightOff();
     }
 
-    public override void StartSession()
+    public void PreSessionCalculs()
     {
-        _started = true;
-        _timeout = true;
+        if (!_isInstantiate)
+        {
+            _frequences = new List<float>();
+            _trueLight = new List<bool>();
+            _isInstantiate = true;
+        }
         _trueLightNb = 0;
         _timeoutCounter = 0.0f;
         _currentIndex = 0;
@@ -43,6 +51,20 @@ public class LightManager : ASessionObject
         test.LightOn(GetCombinaison());
 
         CalculAll();
+    }
+
+    public override void StartSession()
+    {
+        _started = true;
+        _timeout = true;
+        // _trueLightNb = 0;
+        // _timeoutCounter = 0.0f;
+        // _currentIndex = 0;
+        // _playerResponse = 0;
+        // _colorIndex = Random.Range(0, 4);
+        // test.LightOn(GetCombinaison());
+
+        // CalculAll();
     }
 
     public override void StopSession()
