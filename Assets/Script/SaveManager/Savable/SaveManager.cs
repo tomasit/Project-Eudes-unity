@@ -42,6 +42,11 @@ public class SaveManager : MonoBehaviour
         Load();
     }
 
+    public void ResetParameters()
+    {
+        _params = new ParametrableValues();
+    }
+
     private void InitDictionaries()
     {
         _statDictionary.Add(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY, new List<float>());
@@ -75,7 +80,7 @@ public class SaveManager : MonoBehaviour
 
         if (SerializationManager.Exist("GraphData"))
         {
-            _statDictionary = (Dictionary<StatistiqueGraph.StatistiqueType, List<float>>)SerializationManager.Load("GlobalParameters");
+            _statDictionary = (Dictionary<StatistiqueGraph.StatistiqueType, List<float>>)SerializationManager.Load("GraphData");
         }
 
         if (SerializationManager.Exist("Balancing"))
@@ -84,7 +89,13 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public void Save()
+    public void SaveGraph()
     {
+        SerializationManager.Save("GraphData", _statDictionary);
+    }
+
+    public void SaveParameters()
+    {
+        SerializationManager.Save("GlobalParameters", _params);
     }
 }

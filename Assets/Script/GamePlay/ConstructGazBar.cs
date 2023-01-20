@@ -8,6 +8,7 @@ public class ConstructGazBar : MonoBehaviour
 {
     [Range(0.05f, 0.3f)][SerializeField] private float _toleranceHeight;
     [SerializeField] private GameObject _parent;
+    [SerializeField] private GameObject _layout;
     [SerializeField] private GameObject[] _composite;
     [SerializeField] private Color[] _colors;
     private GameObject _toleranceGO;
@@ -17,7 +18,7 @@ public class ConstructGazBar : MonoBehaviour
     private void Awake()
     {
         GameObject bg = (GameObject)Instantiate(_composite[0], _parent.transform) as GameObject;
-        bg.transform.localScale = new Vector3(1, ScaleWithScreen.GetScreenToWorldHeight, 1);
+        bg.transform.localScale = new Vector3(1, _layout.transform.localScale.y, 1);
         bg.GetComponent<SpriteRenderer>().color = _colors[0];
 
         var bounds = bg.GetComponent<SpriteRenderer>().bounds.size;

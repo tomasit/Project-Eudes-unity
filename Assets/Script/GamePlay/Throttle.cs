@@ -11,7 +11,7 @@ public class Throttle : ASessionObject
     private SpriteRenderer _renderer;
     private ConstructGazBar _gazBar;
     private float _accuracy;
-    private float _speed;
+    private float _speed = 0.0f;
 
     public void Start()
     {
@@ -23,6 +23,7 @@ public class Throttle : ASessionObject
 
     public override void StartSession()
     {
+        _speed = 0.0f;
         _started = true;
         _accuracy = 0.0f;
         AutoAddForce(true);
@@ -41,12 +42,14 @@ public class Throttle : ASessionObject
     // about balancing changes.
     public override void SaveSessionData()
     {
+        SaveManager.DataInstance.GetDict()[StatistiqueGraph.StatistiqueType.GAZ_ACCURACY].Add(
+            _accuracy / (SaveManager.DataInstance.GetParameters()._sessionDuration * 60f));
     }
 
     public void MoveThrottle(InputAction.CallbackContext value)
     {
-        _speed = value.ReadValue<float>();
-        // Debug.Log(_speed);
+        if (value.ReadValue<float>() != 0.0f)
+            _speed = value.ReadValue<float>();
     }
 
     private void GetAccuracy()
@@ -79,7 +82,8 @@ public class Throttle : ASessionObject
 
     private void AddForceByThrottle()
     {
-        _rgbd.AddForce(Vector2.up * (SaveManager.DataInstance.GetParameters()._throttleSpeed * _speed * Time.deltaTime), ForceMode2D.Force);
+        // Debug.Log("Speed : " + ((SaveManager.DataInstance.GetParameters()._throttleSpeed * -_speed) * Time.deltaTime));
+        _rgbd.AddForce(Vector2.up * ((SaveManager.DataInstance.GetParameters()._throttleSpeed * -_speed) * Time.deltaTime), ForceMode2D.Force);
     }
 
     private void MoveObject()

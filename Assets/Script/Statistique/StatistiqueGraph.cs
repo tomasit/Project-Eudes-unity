@@ -17,6 +17,7 @@ public class StatistiqueGraph : MonoBehaviour
         NUMBER_MEMORY,
         LIGHT_MEMORY
     }
+
     [SerializeField] private float _minOffset;
     [SerializeField] private int _nbShownSession;
     [SerializeField] private GameObject _valueLayout;
@@ -179,6 +180,11 @@ public class StatistiqueGraph : MonoBehaviour
         foreach (var line in _lineDict)
         {
             index = 1;
+            if (!_valueDict.ContainsKey(line.Key))
+            {
+                line.Value.SetPosition(1, _parent.transform.position);
+                continue;
+            }
             foreach (var v in _valueDict[line.Key])
             {
                 line.Value.SetPosition(index, v.transform.position);

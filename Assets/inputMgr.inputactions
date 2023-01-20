@@ -532,8 +532,17 @@
                 },
                 {
                     "name": "Throttle",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "a1f85890-dfb9-4904-851b-44507cd95e18",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Rubber",
+                    "type": "Value",
+                    "id": "baaf0d5b-dcf0-4196-a6b2-9912c152ccec",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
@@ -597,26 +606,26 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "c17c0377-d43c-4bc4-b3f1-6f6a9b1b64a9",
-                    "path": "1DAxis(minValue=0)",
+                    "name": "",
+                    "id": "33dc9a0b-884d-40c5-9df4-a936a34ec459",
+                    "path": "",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Throttle",
-                    "isComposite": true,
+                    "action": "Rubber",
+                    "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "positive",
-                    "id": "1ccb9d1f-36ea-499d-8a0f-a9f121e38a02",
+                    "name": "",
+                    "id": "e398c394-5494-4e6e-a589-64c3f2b6ca67",
                     "path": "<HID::Thrustmaster Throttle - HOTAS Warthog>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Throttle",
                     "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 }
             ]
         }

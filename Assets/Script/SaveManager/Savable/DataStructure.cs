@@ -3,28 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// J = joystick value (blue things)
-// P = Pedals value (red things)
-// T = Throttle value (green things)
-// N = number value
-// L = light value
+public enum ParametrableValuesEnum
+{
+    gaz_frequence_x,
+    gaz_frequence_y,
+    gaz_force_auto_x,
+    gaz_force_auto_y,
+    gaz_player_speed,
+    pedal_speed,
+    pitch_and_roll_move_speed,
+    pitch_and_roll_rotation_speed,
+    light_true_percentage,
+    light_frequence_x,
+    light_frequence_y,
+    alight_time,
+    session_duration,
+}
+
 [System.Serializable]
 public class ParametrableValues
 {
-    public float _gazTimeRangeMin = 0.2f;
-    public float _gazTimeRangeMax = 0.7f;
-    public float _gazAutoForceMin = 2.0f;
-    public float _gazAutoForceMax = 3.0f;
-    public float _throttleSpeed = 2.0f;
+    public float _gazTimeRangeMin = 0.5f;
+    public float _gazTimeRangeMax = 1.4f;
+    public float _gazAutoForceMin = 1.0f;
+    public float _gazAutoForceMax = 1.5f;
+    public float _throttleSpeed = 100f;
     public float _pedalSpeed = 20.0f;
     public float _PR_MoveSpeed = 20.0f;
     public float _PR_RotationSpeed = 150.0f;
-    public int _lightUpRangeMin = 0;
-    public int _lightUpRangeMax = 12;
-    public float _lightFrequenceRangeMin = 0.0f;
-    public float _lightFrequenceRangeMax = 10.0f;
-    public float _alightTime = 2.0f;
-    public float _sessionDuration = 240.0f;
+    public float _lightTruePercentage = 40.0f;
+    public float _lightFrequenceRangeMin = 0.5f;
+    public float _lightFrequenceRangeMax = 2.0f;
+    public float _alightTime = 1.0f;
+    public float _sessionDuration = 0.25f;
 }
 
 // if you change this structure, all the balance off the game will change.
@@ -40,7 +51,7 @@ public class GameBalance {
         }
         distanceMedium /= data.Count;
 
-        return (distanceMedium - bounds.x) / (bounds.y - bounds.x) * 100.0f;
+        return (distanceMedium - bounds.x) / (bounds.y - bounds.x);
     }
     
     public static float ComputeBalance(List<int> data, Vector2 bounds)
@@ -53,7 +64,7 @@ public class GameBalance {
         }
         distanceMedium /= data.Count;
 
-        return (distanceMedium - bounds.x) / (bounds.y - bounds.x) * 100.0f;
+        return (distanceMedium - bounds.x) / (bounds.y - bounds.x);
     }
 
     public static float _pedalsDistance = 1.0f;

@@ -9,7 +9,7 @@ public class TextUtility : MonoBehaviour
 
     private void Start()
     {
-        _tmpro = GetComponent<TMP_InputField >();
+        _tmpro = GetComponent<TMP_InputField>();
         _tmpro.contentType = TMP_InputField.ContentType.DecimalNumber;
         _tmpro.ForceLabelUpdate();
     }

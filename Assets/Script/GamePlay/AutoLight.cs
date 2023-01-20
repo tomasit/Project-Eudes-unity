@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class AutoLight : MonoBehaviour
 {
-    private SpriteRenderer _lightTR;
-    private SpriteRenderer _lightTL;
-    private SpriteRenderer _lightBR;
-    private SpriteRenderer _lightBL;
+    [SerializeField] private SpriteRenderer _lightTR;
+    [SerializeField] private SpriteRenderer _lightTL;
+    [SerializeField] private SpriteRenderer _lightBR;
+    [SerializeField] private SpriteRenderer _lightBL;
     [SerializeField] private Color _defaultColor;
 
     public void LightOn(Color[] colors)
