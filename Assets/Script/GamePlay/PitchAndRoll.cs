@@ -20,6 +20,7 @@ public class PitchAndRoll : ASessionObject
 
     public void Start()
     {
+        Debug.Log("Pitch and Roll");
         _reactionTime = new List<float>();
         _accuracy = new List<float>();
         _playingArea = FindObjectOfType<PlayingArea>();

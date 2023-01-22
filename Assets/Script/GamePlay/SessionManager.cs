@@ -69,7 +69,7 @@ public class SessionManager : MonoBehaviour
             StopSession();
             // Pause();
             SaveManager.DataInstance.SaveGraph();
-
+            // Debug.Log("End of session");
             SceneManager.LoadScene("MainMenu");
         }
 

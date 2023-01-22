@@ -112,10 +112,10 @@ public class LightManager : ASessionObject
             }
         }
 
-        Debug.Log("End calcul");
+        // Debug.Log("End calcul");
 
-        foreach(var tkt in _trueLight)
-            Debug.Log("Light up : " + tkt);
+        // foreach(var tkt in _trueLight)
+        //     Debug.Log("Light up : " + tkt);
     }
 
     public Color[] GetCombinaison()
