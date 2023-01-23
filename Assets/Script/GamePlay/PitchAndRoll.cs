@@ -8,7 +8,7 @@ public class PitchAndRoll : ASessionObject
     [SerializeField] private float _clampToRotation;
     [SerializeField] private SpriteRenderer _sprite;
     [SerializeField] private GameObject _target;
-  
+
     private Vector2 _movement;
     private PlayingArea _playingArea = null;
     private List<float> _reactionTime;
@@ -20,7 +20,6 @@ public class PitchAndRoll : ASessionObject
 
     public void Start()
     {
-        Debug.Log("Pitch and Roll");
         _reactionTime = new List<float>();
         _accuracy = new List<float>();
         _playingArea = FindObjectOfType<PlayingArea>();
@@ -186,11 +185,14 @@ public class PitchAndRoll : ASessionObject
 
     public void MoveObject()
     {
+        Debug.Log("Move pitch and roll");
         var tempPosition = transform.position;
         var tempRotation = transform.eulerAngles;
 
         transform.Translate(Vector3.up * ((SaveManager.DataInstance.GetParameters()._PR_MoveSpeed * Time.deltaTime) * _movement.y), Space.World);
         
+        Debug.Log(SaveManager.DataInstance.GetParameters()._PR_MoveSpeed);
+
         float newRotation = (SaveManager.DataInstance.GetParameters()._PR_RotationSpeed * Time.deltaTime * _movement.x);
         transform.Rotate(0.0f, 0.0f, -newRotation, Space.World);
         var rotation = transform.eulerAngles;

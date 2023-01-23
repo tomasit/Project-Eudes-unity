@@ -14,7 +14,6 @@ public class ButtonSaveSettings : MonoBehaviour
 
     public void SaveSettings()
     {
-        FindObjectOfType<ParameterView>(true).ValidateInput();
         SaveManager.DataInstance.SaveParameters();
         DestroyThis();
         ViewManager.ShowLast();
@@ -22,6 +21,7 @@ public class ButtonSaveSettings : MonoBehaviour
 
     public void DontSaveSettings()
     {
+        FindObjectOfType<ParameterView>(true).RestoreOldParameters();
         DestroyThis();
         ViewManager.ShowLast();
     }

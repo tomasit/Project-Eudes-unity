@@ -10,9 +10,19 @@ public class TextUtility : MonoBehaviour
     private void Start()
     {
         _tmpro = GetComponent<TMP_InputField>();
-        _tmpro.contentType = TMP_InputField.ContentType.DecimalNumber;
-        _tmpro.ForceLabelUpdate();
+        _tmpro.text = "0";
     }
+
+    public void CheckEmpty()
+    {
+        if (_tmpro.text == "")
+            GetComponent<TMP_InputField>().text = "0";
+        if (_tmpro.text == ".")
+            GetComponent<TMP_InputField>().text = "0";
+        if (_tmpro.text == "-")
+            GetComponent<TMP_InputField>().text = "0";
+    }
+
 
     // public void CheckText()
     // {

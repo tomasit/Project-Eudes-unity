@@ -15,6 +15,14 @@ public class PlayingArea : MonoBehaviour
         RestartSession();
     }
 
+    public void EnableArea(bool enable)
+    {
+        _target.SetActive(enable);
+        _pedals.SetActive(enable);
+        _pitchAndRoll.SetActive(enable);
+        _gaz.SetActive(enable);
+    }
+
     public Vector2 GetAreaBounds()
     {
         return _area.GetComponent<SpriteRenderer>().bounds.size;
@@ -25,7 +33,7 @@ public class PlayingArea : MonoBehaviour
         return _area.transform.position;
     }
 
-    private void RestartSession()
+    public void RestartSession()
     {
         var bounds = GetAreaBounds();
         _target.transform.position = new Vector3(_area.transform.position.x, _area.transform.position.y, _target.transform.position.z);

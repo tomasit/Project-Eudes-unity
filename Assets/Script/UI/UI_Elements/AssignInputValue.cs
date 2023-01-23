@@ -26,6 +26,7 @@ public class AssignInputValue : MonoBehaviour
             GetComponent<TMP_InputField>().text = "0";
         if (value == "-")
             GetComponent<TMP_InputField>().text = "0";
+        AssignValue();
     }
 
     public void WriteDefault()
@@ -61,30 +62,30 @@ public class AssignInputValue : MonoBehaviour
     public void AssignValue()
     {
         if (_valueName == ParametrableValuesEnum.gaz_force_auto_x)
-            _manager._tmpSettings._gazAutoForceMin = float.Parse(GetComponent<TMP_InputField>().text);
+            SaveManager.DataInstance.GetParameters()._gazAutoForceMin = float.Parse(GetComponent<TMP_InputField>().text);
         else if (_valueName == ParametrableValuesEnum.gaz_force_auto_y)
-            _manager._tmpSettings._gazAutoForceMax = float.Parse(GetComponent<TMP_InputField>().text);
+            SaveManager.DataInstance.GetParameters()._gazAutoForceMax = float.Parse(GetComponent<TMP_InputField>().text);
         else if (_valueName == ParametrableValuesEnum.gaz_frequence_x)
-            _manager._tmpSettings._gazTimeRangeMin = float.Parse(GetComponent<TMP_InputField>().text);
+            SaveManager.DataInstance.GetParameters()._gazTimeRangeMin = float.Parse(GetComponent<TMP_InputField>().text);
         else if (_valueName == ParametrableValuesEnum.gaz_frequence_y)
-            _manager._tmpSettings._gazTimeRangeMax = float.Parse(GetComponent<TMP_InputField>().text);
+            SaveManager.DataInstance.GetParameters()._gazTimeRangeMax = float.Parse(GetComponent<TMP_InputField>().text);
         else if (_valueName == ParametrableValuesEnum.gaz_player_speed)
-            _manager._tmpSettings._throttleSpeed = float.Parse(GetComponent<TMP_InputField>().text);
+            SaveManager.DataInstance.GetParameters()._throttleSpeed = float.Parse(GetComponent<TMP_InputField>().text);
         else if (_valueName == ParametrableValuesEnum.pedal_speed)
-            _manager._tmpSettings._pedalSpeed = float.Parse(GetComponent<TMP_InputField>().text);
+            SaveManager.DataInstance.GetParameters()._pedalSpeed = float.Parse(GetComponent<TMP_InputField>().text);
         else if (_valueName == ParametrableValuesEnum.pitch_and_roll_move_speed)
-            _manager._tmpSettings._PR_MoveSpeed = float.Parse(GetComponent<TMP_InputField>().text);
+            SaveManager.DataInstance.GetParameters()._PR_MoveSpeed = float.Parse(GetComponent<TMP_InputField>().text);
         else if (_valueName == ParametrableValuesEnum.pitch_and_roll_rotation_speed)
-            _manager._tmpSettings._PR_RotationSpeed = float.Parse(GetComponent<TMP_InputField>().text);
+            SaveManager.DataInstance.GetParameters()._PR_RotationSpeed = float.Parse(GetComponent<TMP_InputField>().text);
         else if (_valueName == ParametrableValuesEnum.light_true_percentage)
-            _manager._tmpSettings._lightTruePercentage = float.Parse(GetComponent<TMP_InputField>().text);
+            SaveManager.DataInstance.GetParameters()._lightTruePercentage = float.Parse(GetComponent<TMP_InputField>().text);
         else if (_valueName == ParametrableValuesEnum.light_frequence_x)
-            _manager._tmpSettings._lightFrequenceRangeMin = float.Parse(GetComponent<TMP_InputField>().text);
+            SaveManager.DataInstance.GetParameters()._lightFrequenceRangeMin = float.Parse(GetComponent<TMP_InputField>().text);
         else if (_valueName == ParametrableValuesEnum.light_frequence_y)
-            _manager._tmpSettings._lightFrequenceRangeMax = float.Parse(GetComponent<TMP_InputField>().text);
+            SaveManager.DataInstance.GetParameters()._lightFrequenceRangeMax = float.Parse(GetComponent<TMP_InputField>().text);
         else if (_valueName == ParametrableValuesEnum.alight_time)
-            _manager._tmpSettings._alightTime = float.Parse(GetComponent<TMP_InputField>().text);
+            SaveManager.DataInstance.GetParameters()._alightTime = float.Parse(GetComponent<TMP_InputField>().text);
         else if (_valueName == ParametrableValuesEnum.session_duration)
-            _manager._tmpSettings._sessionDuration = float.Parse(GetComponent<TMP_InputField>().text);
+            SaveManager.DataInstance.GetParameters()._sessionDuration = float.Parse(GetComponent<TMP_InputField>().text);
     }
 }

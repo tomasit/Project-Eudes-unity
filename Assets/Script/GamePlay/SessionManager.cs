@@ -66,11 +66,7 @@ public class SessionManager : MonoBehaviour
 
         if (_timer >= SaveManager.DataInstance.GetParameters()._sessionDuration * 60f)
         {
-            StopSession();
-            // Pause();
-            SaveManager.DataInstance.SaveGraph();
-            // Debug.Log("End of session");
-            SceneManager.LoadScene("MainMenu");
+            FindObjectOfType<ShowView>().ShowEndGameView();
         }
 
         _timer += Time.deltaTime;

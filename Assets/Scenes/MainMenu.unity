@@ -3714,6 +3714,7 @@ MonoBehaviour:
     _lightFrequenceRangeMax: 2
     _alightTime: 1
     _sessionDuration: 0.25
+  _playingArea: {fileID: 1977100001}
 --- !u!114 &297758787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11957,7 +11958,7 @@ Transform:
   m_Children:
   - {fileID: 1485590244}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1016698751
 GameObject:
@@ -12263,145 +12264,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027740447}
   m_CullTransparentMesh: 1
---- !u!1 &1029249705
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1029249707}
-  - component: {fileID: 1029249706}
-  m_Layer: 0
-  m_Name: InputMgr
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1029249706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1029249705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: cf697a79a2c84054fa1a997c33b9fd5b, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ce2c14cf-41fd-44db-aa4d-d2dd1174eab4
-    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 77e1f907-ed52-4e86-a5c8-1c6334ce3d72
-    m_ActionName: UI/Submit[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 58a3506d-d9ce-4de0-b6cc-af07b4584c67
-    m_ActionName: UI/Cancel[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6099c899-94ed-4f0d-8512-81952e4bd330
-    m_ActionName: UI/Point[/Mouse/position]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 30335cc5-db91-4f68-8708-bb7021812f89
-    m_ActionName: UI/Click[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: de619b09-4738-4bae-bcd2-21eabfacd7f2
-    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a34f6aa9-f309-4683-b854-5a9754378b0b
-    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 7c7eda3c-ede2-42e2-ad5f-d91fb0fb5830
-    m_ActionName: UI/RightClick[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e67397e9-4174-4c00-9239-6d41c9e9d23d
-    m_ActionName: UI/TrackedDevicePosition
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: bef90264-80e6-4789-963e-c07f32d64d51
-    m_ActionName: UI/TrackedDeviceOrientation
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PitchAndRoll, Assembly-CSharp
-        m_MethodName: Move
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 165c9869-c347-4f73-ad3c-48ad2f687fc2
-    m_ActionName: PitchAndRoll/Move
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Throttle, Assembly-CSharp
-        m_MethodName: MoveThrottle
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: a1f85890-dfb9-4904-851b-44507cd95e18
-    m_ActionName: Player/Throttle[/Thrustmaster Throttle - HOTAS Warthog/stick/down,/Thrustmaster
-      Throttle - HOTAS Warthog/stick/up]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: baaf0d5b-dcf0-4196-a6b2-9912c152ccec
-    m_ActionName: Player/Rubber
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!4 &1029249707
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1029249705}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09808388, y: 0.42613864, z: 116.07737}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1047634845
 GameObject:
   m_ObjectHideFlags: 0
@@ -15766,8 +15628,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inPause: 0
-  _started: 1
-  _demoObject: 0
+  _started: 0
+  _demoObject: 1
 --- !u!50 &1364973316
 Rigidbody2D:
   serializedVersion: 4
@@ -16039,6 +15901,145 @@ RectTransform:
   m_AnchoredPosition: {x: 146, y: -40}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1397915882
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1397915884}
+  - component: {fileID: 1397915883}
+  m_Layer: 0
+  m_Name: InputMgr
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1397915883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397915882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: cf697a79a2c84054fa1a997c33b9fd5b, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ce2c14cf-41fd-44db-aa4d-d2dd1174eab4
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 77e1f907-ed52-4e86-a5c8-1c6334ce3d72
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 58a3506d-d9ce-4de0-b6cc-af07b4584c67
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6099c899-94ed-4f0d-8512-81952e4bd330
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 30335cc5-db91-4f68-8708-bb7021812f89
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: de619b09-4738-4bae-bcd2-21eabfacd7f2
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a34f6aa9-f309-4683-b854-5a9754378b0b
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7c7eda3c-ede2-42e2-ad5f-d91fb0fb5830
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e67397e9-4174-4c00-9239-6d41c9e9d23d
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bef90264-80e6-4789-963e-c07f32d64d51
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1716381428}
+        m_TargetAssemblyTypeName: PitchAndRoll, Assembly-CSharp
+        m_MethodName: Move
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 165c9869-c347-4f73-ad3c-48ad2f687fc2
+    m_ActionName: PitchAndRoll/Move
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1364973315}
+        m_TargetAssemblyTypeName: Throttle, Assembly-CSharp
+        m_MethodName: MoveThrottle
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a1f85890-dfb9-4904-851b-44507cd95e18
+    m_ActionName: Player/Throttle[/Thrustmaster Throttle - HOTAS Warthog/stick/down,/Thrustmaster
+      Throttle - HOTAS Warthog/stick/up]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: baaf0d5b-dcf0-4196-a6b2-9912c152ccec
+    m_ActionName: Player/Rubber
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!4 &1397915884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397915882}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.09808388, y: 0.42613864, z: 116.07737}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1401215415
 GameObject:
   m_ObjectHideFlags: 0
@@ -18275,7 +18276,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1594028862
 GameObject:
@@ -18882,7 +18883,7 @@ Transform:
   m_Children:
   - {fileID: 1364973318}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1688980086
 MonoBehaviour:
@@ -19190,7 +19191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inPause: 0
   _started: 0
-  _demoObject: 0
+  _demoObject: 1
   _clampToRotation: 20
   _sprite: {fileID: 363739877}
   _target: {fileID: 1007762079}
@@ -19208,7 +19209,7 @@ Transform:
   m_Children:
   - {fileID: 363739878}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1725268682
 GameObject:
@@ -19692,7 +19693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inPause: 0
   _started: 0
-  _demoObject: 0
+  _demoObject: 1
   _pedals: {fileID: 895625407}
   _target: {fileID: 1007762079}
 --- !u!4 &1751687737
@@ -19709,7 +19710,7 @@ Transform:
   m_Children:
   - {fileID: 895625408}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1754517477
 GameObject:
@@ -24161,7 +24162,7 @@ MonoBehaviour:
   _target: {fileID: 1007762079}
   _pedals: {fileID: 1751687735}
   _pitchAndRoll: {fileID: 1716381427}
-  _gaz: {fileID: 0}
+  _gaz: {fileID: 1688980084}
 --- !u!212 &1977100002
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -24227,7 +24228,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1992720465
 GameObject:
