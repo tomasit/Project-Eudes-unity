@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI.Extensions;
 
 public class ParameterView : AView 
 {
@@ -10,7 +11,7 @@ public class ParameterView : AView
 
     public override void Show()
     {
-        _tmpSettings = SaveManager.DataInstance.GetParameters();
+        _tmpSettings = new ParametrableValues(SaveManager.DataInstance.GetParameters());
         _playingArea.gameObject.SetActive(true);
         _playingArea.EnableArea(true);
         _playingArea.RestartSession();
@@ -35,23 +36,15 @@ public class ParameterView : AView
 
     public void RestoreOldParameters()
     {
+        // Debug.Log("Restore old parameters");
         SaveManager.DataInstance.SetParameters(_tmpSettings);
     }
-
-    // public void ValidateInput()
-    // {
-    //     foreach (var input in _input)
-    //     {
-    //         input.AssignValue();
-    //     }
-    //     SaveManager.DataInstance.SetParameters(_tmpSettings);
-    // }
 
     public void InteractInputField(bool interact)
     {
         foreach (var input in _input)
         {
-            input.GetComponent<TMP_InputField>().interactable = interact;
+            input.GetComponent<RangeSlider>().interactable = interact;
         }
     }
 }

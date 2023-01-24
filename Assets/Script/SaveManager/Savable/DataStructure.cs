@@ -23,6 +23,25 @@ public enum ParametrableValuesEnum
 [System.Serializable]
 public class ParametrableValues
 {
+    public ParametrableValues() {}
+
+    public ParametrableValues(ParametrableValues other)
+    {
+        _gazTimeRangeMin = other._gazTimeRangeMin;
+        _gazTimeRangeMax = other._gazTimeRangeMax;
+        _gazAutoForceMin = other._gazAutoForceMin;
+        _gazAutoForceMax = other._gazAutoForceMax;
+        _throttleSpeed = other._throttleSpeed;
+        _pedalSpeed = other._pedalSpeed;
+        _PR_MoveSpeed = other._PR_MoveSpeed;
+        _PR_RotationSpeed = other._PR_RotationSpeed;
+        _lightTruePercentage = other._lightTruePercentage;
+        _lightFrequenceRangeMin = other._lightFrequenceRangeMin;
+        _lightFrequenceRangeMax = other._lightFrequenceRangeMax;
+        _alightTime = other._alightTime;
+        _sessionDuration = other._sessionDuration;
+    }
+
     public float _gazTimeRangeMin = 0.5f;
     public float _gazTimeRangeMax = 1.4f;
     public float _gazAutoForceMin = 1.0f;
