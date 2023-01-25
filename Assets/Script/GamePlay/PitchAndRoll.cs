@@ -88,110 +88,13 @@ public class PitchAndRoll : ASessionObject
         _movement = value.ReadValue<Vector2>();
     }
 
-    public static Vector3[] GetSpriteCorners(SpriteRenderer renderer)
-    {
-        Vector3 topRight = renderer.transform.TransformPoint(renderer.sprite.bounds.max);
-        Vector3 topLeft = renderer.transform.TransformPoint(new Vector3(renderer.sprite.bounds.max.x, renderer.sprite.bounds.min.y, 0));
-        Vector3 botLeft = renderer.transform.TransformPoint(renderer.sprite.bounds.min);
-        Vector3 botRight = renderer.transform.TransformPoint(new Vector3(renderer.sprite.bounds.min.x, renderer.sprite.bounds.max.y, 0));
-        return new Vector3[] { topRight, topLeft, botLeft, botRight };
-    }
-
-    private int CheckTop(Vector3[] corners, int i)
-    {
-        bool farestCorner = (corners[0].x > corners[1].x) ? true : false;
- 
-        if (farestCorner && corners[0].x > _playingArea.GetAreaPosition().x + _playingArea.GetAreaBounds().x * 0.5f)
-        {
-            var p = transform.position;
-            p.x -= corners[0].x - (_playingArea.GetAreaPosition().x + _playingArea.GetAreaBounds().x * 0.5f);
-            transform.position = p;
-            i |= (1 << 1);
-        }
-        else if (corners[1].x > _playingArea.GetAreaPosition().x + _playingArea.GetAreaBounds().x * 0.5f)
-        {
-            var p = transform.position;
-            p.x -= corners[1].x - (_playingArea.GetAreaPosition().x + _playingArea.GetAreaBounds().x * 0.5f);
-            transform.position = p;
-            i |= (1 << 2);
-        }
-
-        bool farestCornerY = (Mathf.Abs(corners[0].y) > Mathf.Abs(corners[1].y)) ? true : false;
-        if (farestCornerY && corners[0].y > _playingArea.GetAreaPosition().y + _playingArea.GetAreaBounds().y * 0.5f)
-        {
-            var p = transform.position;
-            p.y -= corners[0].y - (_playingArea.GetAreaPosition().y + _playingArea.GetAreaBounds().y * 0.5f);
-            transform.position = p;
-            i |= (1 << 3);
-        }
-        else if (corners[1].y < _playingArea.GetAreaPosition().y - _playingArea.GetAreaBounds().y * 0.5f)
-        {
-            var p = transform.position;
-            p.y += Mathf.Abs(corners[1].y) - Mathf.Abs(_playingArea.GetAreaPosition().y - _playingArea.GetAreaBounds().y * 0.5f);
-            transform.position = p;
-            i |= (1 << 4);
-        }
-
-        return i;
-    }
-
-    private int CheckBot(Vector3[] corners, int i)
-    {
-        bool farestCorner = (corners[2].x < corners[3].x) ? true : false;
-
-        if (farestCorner && corners[2].x < _playingArea.GetAreaPosition().x - _playingArea.GetAreaBounds().x * 0.5f)
-        {
-            var p = transform.position;
-            p.x += Mathf.Abs(corners[2].x) - Mathf.Abs(_playingArea.GetAreaPosition().x - _playingArea.GetAreaBounds().x * 0.5f);
-            transform.position = p;
-            i |= (1 << 5);
-        }
-        else if (corners[3].x < _playingArea.GetAreaPosition().x - _playingArea.GetAreaBounds().x * 0.5f)
-        {
-            var p = transform.position;
-            p.x += Mathf.Abs(corners[3].x) - Mathf.Abs(_playingArea.GetAreaPosition().x - _playingArea.GetAreaBounds().x * 0.5f);
-            transform.position = p;
-            i |= (1 << 6);
-        }
-
-        bool farestCornerY = (Mathf.Abs(corners[2].y) > Mathf.Abs(corners[3].y)) ? true : false;
-        if (farestCornerY && corners[2].y < _playingArea.GetAreaPosition().y - _playingArea.GetAreaBounds().y * 0.5f)
-        {
-            var p = transform.position;
-            p.y += Mathf.Abs(corners[2].y) - Mathf.Abs(_playingArea.GetAreaPosition().y - _playingArea.GetAreaBounds().y * 0.5f);
-            transform.position = p;
-            i |= (1 << 7);
-        }
-        else if (corners[3].y > _playingArea.GetAreaPosition().y + _playingArea.GetAreaBounds().y * 0.5f)
-        {
-            var p = transform.position;
-            p.y -= corners[3].y - (_playingArea.GetAreaPosition().y + _playingArea.GetAreaBounds().y * 0.5f);
-            transform.position = p;
-            i |= (1 << 8);
-        }
-
-        return i;
-    }
-
-    private int CheckCorners()
-    {
-        var corners = GetSpriteCorners(_sprite);
-
-        int i = 0;
-        i = CheckTop(corners, i);
-        i = CheckBot(corners, i);
-        return i;
-    }
 
     public void MoveObject()
     {
-        Debug.Log("Move pitch and roll");
         var tempPosition = transform.position;
         var tempRotation = transform.eulerAngles;
 
         transform.Translate(Vector3.up * ((SaveManager.DataInstance.GetParameters()._PR_MoveSpeed * Time.deltaTime) * _movement.y), Space.World);
-        
-        Debug.Log(SaveManager.DataInstance.GetParameters()._PR_MoveSpeed);
 
         float newRotation = (SaveManager.DataInstance.GetParameters()._PR_RotationSpeed * Time.deltaTime * _movement.x);
         transform.Rotate(0.0f, 0.0f, -newRotation, Space.World);
@@ -199,28 +102,28 @@ public class PitchAndRoll : ASessionObject
         rotation.z = Mathf.Clamp(rotation.z, rotation.z > 150.0f ? 360.0f - _clampToRotation : 0, rotation.z > 150.0f ? 360.0f : _clampToRotation);
         transform.eulerAngles = rotation;
 
-        int flags = CheckCorners();
+        // int flags = CheckCorners();
 
-        if (((flags >> 3) & 1) == 1 && ((flags >> 7) & 1) == 1)
-        {
-            transform.position = new Vector3(transform.position.x, tempPosition.y, tempPosition.z);
-            transform.eulerAngles = tempRotation;
-        }
-        if (((flags >> 4) & 1) == 1 && ((flags >> 8) & 1) == 1)
-        {
-            transform.position = new Vector3(transform.position.x, tempPosition.y, tempPosition.z);
-            transform.eulerAngles = tempRotation;
-        }
-        if (((flags >> 1) & 1) == 1 && ((flags >> 5) & 1) == 1)
-        {
-            transform.position = new Vector3(tempPosition.x, transform.position.y, tempPosition.z);
-            transform.eulerAngles = tempRotation;
-        }
-        if (((flags >> 2) & 1) == 1 && ((flags >> 6) & 1) == 1)
-        {
-            transform.position = new Vector3(tempPosition.x, transform.position.y, tempPosition.z);
-            transform.eulerAngles = tempRotation;
-        }
+        // if (((flags >> 3) & 1) == 1 && ((flags >> 7) & 1) == 1)
+        // {
+        //     transform.position = new Vector3(transform.position.x, tempPosition.y, tempPosition.z);
+        //     transform.eulerAngles = tempRotation;
+        // }
+        // if (((flags >> 4) & 1) == 1 && ((flags >> 8) & 1) == 1)
+        // {
+        //     transform.position = new Vector3(transform.position.x, tempPosition.y, tempPosition.z);
+        //     transform.eulerAngles = tempRotation;
+        // }
+        // if (((flags >> 1) & 1) == 1 && ((flags >> 5) & 1) == 1)
+        // {
+        //     transform.position = new Vector3(tempPosition.x, transform.position.y, tempPosition.z);
+        //     transform.eulerAngles = tempRotation;
+        // }
+        // if (((flags >> 2) & 1) == 1 && ((flags >> 6) & 1) == 1)
+        // {
+        //     transform.position = new Vector3(tempPosition.x, transform.position.y, tempPosition.z);
+        //     transform.eulerAngles = tempRotation;
+        // }
     }
 
     private int GetDir(Vector3 target)
@@ -297,3 +200,100 @@ public class PitchAndRoll : ASessionObject
         }
     }
 }
+
+
+
+    // public static Vector3[] GetSpriteCorners(SpriteRenderer renderer)
+    // {
+    //     Vector3 topRight = renderer.transform.TransformPoint(renderer.sprite.bounds.max);
+    //     Vector3 topLeft = renderer.transform.TransformPoint(new Vector3(renderer.sprite.bounds.max.x, renderer.sprite.bounds.min.y, 0));
+    //     Vector3 botLeft = renderer.transform.TransformPoint(renderer.sprite.bounds.min);
+    //     Vector3 botRight = renderer.transform.TransformPoint(new Vector3(renderer.sprite.bounds.min.x, renderer.sprite.bounds.max.y, 0));
+    //     return new Vector3[] { topRight, topLeft, botLeft, botRight };
+    // }
+
+    // private int CheckTop(Vector3[] corners, int i)
+    // {
+    //     bool farestCorner = (corners[0].x > corners[1].x) ? true : false;
+ 
+    //     if (farestCorner && corners[0].x > _playingArea.GetAreaPosition().x + _playingArea.GetAreaBounds().x * 0.5f)
+    //     {
+    //         var p = transform.position;
+    //         p.x -= corners[0].x - (_playingArea.GetAreaPosition().x + _playingArea.GetAreaBounds().x * 0.5f);
+    //         transform.position = p;
+    //         i |= (1 << 1);
+    //     }
+    //     else if (corners[1].x > _playingArea.GetAreaPosition().x + _playingArea.GetAreaBounds().x * 0.5f)
+    //     {
+    //         var p = transform.position;
+    //         p.x -= corners[1].x - (_playingArea.GetAreaPosition().x + _playingArea.GetAreaBounds().x * 0.5f);
+    //         transform.position = p;
+    //         i |= (1 << 2);
+    //     }
+
+    //     bool farestCornerY = (Mathf.Abs(corners[0].y) > Mathf.Abs(corners[1].y)) ? true : false;
+    //     if (farestCornerY && corners[0].y > _playingArea.GetAreaPosition().y + _playingArea.GetAreaBounds().y * 0.5f)
+    //     {
+    //         var p = transform.position;
+    //         p.y -= corners[0].y - (_playingArea.GetAreaPosition().y + _playingArea.GetAreaBounds().y * 0.5f);
+    //         transform.position = p;
+    //         i |= (1 << 3);
+    //     }
+    //     else if (corners[1].y < _playingArea.GetAreaPosition().y - _playingArea.GetAreaBounds().y * 0.5f)
+    //     {
+    //         var p = transform.position;
+    //         p.y += Mathf.Abs(corners[1].y) - Mathf.Abs(_playingArea.GetAreaPosition().y - _playingArea.GetAreaBounds().y * 0.5f);
+    //         transform.position = p;
+    //         i |= (1 << 4);
+    //     }
+
+    //     return i;
+    // }
+
+    // private int CheckBot(Vector3[] corners, int i)
+    // {
+    //     bool farestCorner = (corners[2].x < corners[3].x) ? true : false;
+
+    //     if (farestCorner && corners[2].x < _playingArea.GetAreaPosition().x - _playingArea.GetAreaBounds().x * 0.5f)
+    //     {
+    //         var p = transform.position;
+    //         p.x += Mathf.Abs(corners[2].x) - Mathf.Abs(_playingArea.GetAreaPosition().x - _playingArea.GetAreaBounds().x * 0.5f);
+    //         transform.position = p;
+    //         i |= (1 << 5);
+    //     }
+    //     else if (corners[3].x < _playingArea.GetAreaPosition().x - _playingArea.GetAreaBounds().x * 0.5f)
+    //     {
+    //         var p = transform.position;
+    //         p.x += Mathf.Abs(corners[3].x) - Mathf.Abs(_playingArea.GetAreaPosition().x - _playingArea.GetAreaBounds().x * 0.5f);
+    //         transform.position = p;
+    //         i |= (1 << 6);
+    //     }
+
+    //     bool farestCornerY = (Mathf.Abs(corners[2].y) > Mathf.Abs(corners[3].y)) ? true : false;
+    //     if (farestCornerY && corners[2].y < _playingArea.GetAreaPosition().y - _playingArea.GetAreaBounds().y * 0.5f)
+    //     {
+    //         var p = transform.position;
+    //         p.y += Mathf.Abs(corners[2].y) - Mathf.Abs(_playingArea.GetAreaPosition().y - _playingArea.GetAreaBounds().y * 0.5f);
+    //         transform.position = p;
+    //         i |= (1 << 7);
+    //     }
+    //     else if (corners[3].y > _playingArea.GetAreaPosition().y + _playingArea.GetAreaBounds().y * 0.5f)
+    //     {
+    //         var p = transform.position;
+    //         p.y -= corners[3].y - (_playingArea.GetAreaPosition().y + _playingArea.GetAreaBounds().y * 0.5f);
+    //         transform.position = p;
+    //         i |= (1 << 8);
+    //     }
+
+    //     return i;
+    // }
+
+    // private int CheckCorners()
+    // {
+    //     var corners = GetSpriteCorners(_sprite);
+
+    //     int i = 0;
+    //     i = CheckTop(corners, i);
+    //     i = CheckBot(corners, i);
+    //     return i;
+    // }

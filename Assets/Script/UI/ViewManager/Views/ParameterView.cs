@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI.Extensions;
+using UnityEngine.UI;
 
 public class ParameterView : AView 
 {
-    [SerializeField] private AssignInputValue[] _input;
+    [SerializeField] private AssignRangedValue[] _input;
+    [SerializeField] private AssignSliderValue[] _sliders;
     [HideInInspector] public ParametrableValues _tmpSettings;
     [SerializeField] private PlayingArea _playingArea;
 
@@ -32,6 +34,10 @@ public class ParameterView : AView
         {
             input.WriteDefault();
         }
+        foreach (var slider in _sliders)
+        {
+            slider.WriteDefault();
+        }
     }
 
     public void RestoreOldParameters()
@@ -45,6 +51,10 @@ public class ParameterView : AView
         foreach (var input in _input)
         {
             input.GetComponent<RangeSlider>().interactable = interact;
+        }
+        foreach (var slider in _sliders)
+        {
+            slider.GetComponent<Slider>().interactable = interact;
         }
     }
 }

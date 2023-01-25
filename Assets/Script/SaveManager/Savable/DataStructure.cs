@@ -5,17 +5,11 @@ using UnityEngine;
 
 public enum ParametrableValuesEnum
 {
-    gaz_frequence_x,
-    gaz_frequence_y,
-    gaz_force_auto_x,
-    gaz_force_auto_y,
     gaz_player_speed,
     pedal_speed,
     pitch_and_roll_move_speed,
     pitch_and_roll_rotation_speed,
     light_true_percentage,
-    light_frequence_x,
-    light_frequence_y,
     alight_time,
     session_duration,
 }
@@ -36,25 +30,29 @@ public class ParametrableValues
         _PR_MoveSpeed = other._PR_MoveSpeed;
         _PR_RotationSpeed = other._PR_RotationSpeed;
         _lightTruePercentage = other._lightTruePercentage;
+        _lightTruePercentageMin = other._lightTruePercentageMin;
+        _lightTruePercentageMax = other._lightTruePercentageMax;
         _lightFrequenceRangeMin = other._lightFrequenceRangeMin;
         _lightFrequenceRangeMax = other._lightFrequenceRangeMax;
         _alightTime = other._alightTime;
         _sessionDuration = other._sessionDuration;
     }
 
-    public float _gazTimeRangeMin = 0.5f;
-    public float _gazTimeRangeMax = 1.4f;
     public float _gazAutoForceMin = 1.0f;
     public float _gazAutoForceMax = 1.5f;
+    public float _gazTimeRangeMin = 0.5f;
+    public float _gazTimeRangeMax = 1.4f;
     public float _throttleSpeed = 100f;
     public float _pedalSpeed = 20.0f;
     public float _PR_MoveSpeed = 20.0f;
     public float _PR_RotationSpeed = 150.0f;
+    public float _lightTruePercentageMin = 10.0f;
+    public float _lightTruePercentageMax = 60.0f;
     public float _lightTruePercentage = 40.0f;
     public float _lightFrequenceRangeMin = 0.5f;
     public float _lightFrequenceRangeMax = 2.0f;
     public float _alightTime = 1.0f;
-    public float _sessionDuration = 0.25f;
+    public float _sessionDuration = 1.0f;
 }
 
 // if you change this structure, all the balance off the game will change.
