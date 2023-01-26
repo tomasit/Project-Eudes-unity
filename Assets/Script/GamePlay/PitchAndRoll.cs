@@ -16,7 +16,8 @@ public class PitchAndRoll : ASessionObject
     private Coroutine _reactionTimeCoroutine = null;
     private float _reactionTimeCounter = 0.0f;
     private float _timer = 0.0f;
-    private const float _minimumPosY = 0.07f;
+    private const float _minimumPosY = 0.5f;
+    private const float _maximumPosY = 3;
 
     public void Start()
     {
@@ -36,11 +37,11 @@ public class PitchAndRoll : ASessionObject
             Random.Range(360.0f - _clampToRotation, 355.0f) : Random.Range(5.0f, _clampToRotation)));
 
         float newPos = (Random.Range(0, 2) == 1) ?
-            Random.Range(_playingArea.GetAreaBounds().y * _minimumPosY, _playingArea.GetAreaBounds().y * 0.35f) :
-            Random.Range(_playingArea.GetAreaBounds().y * -_minimumPosY, _playingArea.GetAreaBounds().y * -0.35f);
+            Random.Range(_playingArea.GetAreaPosition().y + _minimumPosY, _playingArea.GetAreaPosition().y + _maximumPosY) :
+            Random.Range(_playingArea.GetAreaPosition().y - _minimumPosY, _playingArea.GetAreaPosition().y - _maximumPosY);
 
         var position = new Vector3(
-            transform.position.x, _playingArea.GetAreaPosition().y + newPos, transform.position.z);
+            transform.position.x, newPos, transform.position.z);
 
         transform.position = position;
     }
@@ -61,14 +62,14 @@ public class PitchAndRoll : ASessionObject
         _accuracy.Clear();
         _reactionTime.Clear();
 
-        foreach (var tkt in SaveManager.DataInstance.GetDict()[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY])
-        {
-            Debug.Log("Percentage of accuracy : " + tkt);
-        }
-        foreach (var tkt in SaveManager.DataInstance.GetDict()[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME])
-        {
-            Debug.Log("Percentage of reactionTime : " + tkt);
-        }
+        // foreach (var tkt in SaveManager.DataInstance.GetDict()[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY])
+        // {
+        //     Debug.Log("Percentage of accuracy : " + tkt);
+        // }
+        // foreach (var tkt in SaveManager.DataInstance.GetDict()[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME])
+        // {
+        //     Debug.Log("Percentage of reactionTime : " + tkt);
+        // }
     }
 
     // This function calcul statistique from session datas.
@@ -91,39 +92,18 @@ public class PitchAndRoll : ASessionObject
 
     public void MoveObject()
     {
-        var tempPosition = transform.position;
         var tempRotation = transform.eulerAngles;
 
         transform.Translate(Vector3.up * ((SaveManager.DataInstance.GetParameters()._PR_MoveSpeed * Time.deltaTime) * _movement.y), Space.World);
+        var tempPosition = transform.position;
+        tempPosition.y = Mathf.Clamp(tempPosition.y, _playingArea.GetAreaPosition().y - _maximumPosY, _playingArea.GetAreaPosition().y + _maximumPosY);
+        transform.position = tempPosition;
 
         float newRotation = (SaveManager.DataInstance.GetParameters()._PR_RotationSpeed * Time.deltaTime * _movement.x);
         transform.Rotate(0.0f, 0.0f, -newRotation, Space.World);
         var rotation = transform.eulerAngles;
         rotation.z = Mathf.Clamp(rotation.z, rotation.z > 150.0f ? 360.0f - _clampToRotation : 0, rotation.z > 150.0f ? 360.0f : _clampToRotation);
         transform.eulerAngles = rotation;
-
-        // int flags = CheckCorners();
-
-        // if (((flags >> 3) & 1) == 1 && ((flags >> 7) & 1) == 1)
-        // {
-        //     transform.position = new Vector3(transform.position.x, tempPosition.y, tempPosition.z);
-        //     transform.eulerAngles = tempRotation;
-        // }
-        // if (((flags >> 4) & 1) == 1 && ((flags >> 8) & 1) == 1)
-        // {
-        //     transform.position = new Vector3(transform.position.x, tempPosition.y, tempPosition.z);
-        //     transform.eulerAngles = tempRotation;
-        // }
-        // if (((flags >> 1) & 1) == 1 && ((flags >> 5) & 1) == 1)
-        // {
-        //     transform.position = new Vector3(tempPosition.x, transform.position.y, tempPosition.z);
-        //     transform.eulerAngles = tempRotation;
-        // }
-        // if (((flags >> 2) & 1) == 1 && ((flags >> 6) & 1) == 1)
-        // {
-        //     transform.position = new Vector3(tempPosition.x, transform.position.y, tempPosition.z);
-        //     transform.eulerAngles = tempRotation;
-        // }
     }
 
     private int GetDir(Vector3 target)
@@ -139,7 +119,7 @@ public class PitchAndRoll : ASessionObject
         return dir;
     }
 
-    private IEnumerator ReactionTimeClock(float waitTime)
+    private IEnumerator ReactionTimeClock()
     {
         _reactionTimeCounter = 0.0f;
         int dir = -GetDir(_target.transform.position);
@@ -173,7 +153,7 @@ public class PitchAndRoll : ASessionObject
             _reactionTimeCoroutine = null;
             _reactionTime.Add(Mathf.Clamp(_reactionTimeCounter, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME).x, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME).y));
         }
-        _reactionTimeCoroutine = StartCoroutine(ReactionTimeClock(0.01f));
+        _reactionTimeCoroutine = StartCoroutine(ReactionTimeClock());
     }
 
     private void Update()

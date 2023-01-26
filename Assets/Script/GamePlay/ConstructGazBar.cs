@@ -14,11 +14,18 @@ public class ConstructGazBar : MonoBehaviour
     private GameObject _toleranceGO;
     public float _sideSize = 0.1f;
     [SerializeField] private GameObject _arrow;
+    private float _scaleY;
+
+    public float GetScaleY()
+    {
+        return _scaleY;
+    }
 
     private void Awake()
     {
         GameObject bg = (GameObject)Instantiate(_composite[0], _parent.transform) as GameObject;
-        bg.transform.localScale = new Vector3(1, ScaleWithScreen.GetScreenToWorldHeight, 1);
+        bg.transform.localScale = new Vector3(1, 8, 1);
+        _scaleY = bg.transform.localScale.y;
         bg.GetComponent<SpriteRenderer>().color = _colors[0];
 
         var bounds = bg.GetComponent<SpriteRenderer>().bounds.size;

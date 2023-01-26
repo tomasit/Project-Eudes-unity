@@ -11,6 +11,6 @@ public abstract class ASessionObject : MonoBehaviour
     public abstract void StopSession();
     public abstract void SaveSessionData();
     public bool CanRun() { return !_inPause && _started; }
-    public bool Pause() { return _started ? _inPause = true : false; }
-    public void Resume() { _inPause = false; }
+    public virtual bool Pause() { return _started ? _inPause = true : false; }
+    public virtual void Resume() { _inPause = false; }
 }
