@@ -35,6 +35,11 @@ public class LightManager : ASessionObject
             light.LightOff();
     }
 
+    public void SetPlayerNumber(int response)
+    {
+        _playerResponse = response;
+    }
+
     public void PreSessionCalculs()
     {
         if (!_isInstantiate)
@@ -57,14 +62,6 @@ public class LightManager : ASessionObject
     {
         _started = true;
         _timeout = true;
-        // _trueLightNb = 0;
-        // _timeoutCounter = 0.0f;
-        // _currentIndex = 0;
-        // _playerResponse = 0;
-        // _colorIndex = Random.Range(0, 4);
-        // test.LightOn(GetCombinaison());
-
-        // CalculAll();
     }
 
     public override void StopSession()
@@ -81,7 +78,8 @@ public class LightManager : ASessionObject
     public override void SaveSessionData()
     {
         SaveManager.DataInstance.GetDict()[StatistiqueGraph.StatistiqueType.LIGHT_MEMORY].Add(
-            _playerResponse / _trueLightNb);
+            (_playerResponse == _trueLightNb ? 1 : 0)
+        );
     }
 
     private void CalculAll()
@@ -99,8 +97,10 @@ public class LightManager : ASessionObject
                 i += 1;
             }
         }
-        _trueLightNb = (int)Mathf.Round((float)i / 100.0f * parameters._lightTruePercentage);
-        
+        _trueLightNb = (int)Mathf.Round((float)i / 100.0f * Random.Range(parameters._lightTruePercentageMin, parameters._lightTruePercentageMax));
+
+        Debug.Log("true light number : " + _trueLightNb);
+
         for (int j = 0, cond = 0; cond != _trueLightNb; j++)
         {
             if (_trueLight[j % _trueLight.Count])
@@ -111,11 +111,6 @@ public class LightManager : ASessionObject
                 cond++;
             }
         }
-
-        // Debug.Log("End calcul");
-
-        // foreach(var tkt in _trueLight)
-        //     Debug.Log("Light up : " + tkt);
     }
 
     public Color[] GetCombinaison()

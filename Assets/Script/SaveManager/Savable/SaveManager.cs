@@ -63,7 +63,7 @@ public class SaveManager : MonoBehaviour
         _statDictionary.Add(StatistiqueGraph.StatistiqueType.LIGHT_MEMORY, new List<float>());
 
         _balance.Add(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY, new Vector2(0.0f, 2.0f));
-        _balance.Add(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME, new Vector2(0.3f, 1.5f));
+        _balance.Add(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME, new Vector2(0.0f, 1.5f));
         _balance.Add(StatistiqueGraph.StatistiqueType.GAZ_ACCURACY, new Vector2(1.0f, 5.0f));
         _balance.Add(StatistiqueGraph.StatistiqueType.RUDDER_ACCURACY, new Vector2(1.0f, 5.0f));
         _balance.Add(StatistiqueGraph.StatistiqueType.RUDDER_REACTION_TIME, new Vector2(0.3f, 2.0f));

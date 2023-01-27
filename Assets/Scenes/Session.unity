@@ -5590,7 +5590,6 @@ MonoBehaviour:
   - {fileID: 1573995337}
   - {fileID: 599610561}
   _isRunning: 0
-  tkt: 0
 --- !u!1 &1427606476
 GameObject:
   m_ObjectHideFlags: 0
@@ -6000,8 +5999,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1481879608}
-        m_TargetAssemblyTypeName: TextUtility, Assembly-CSharp
-        m_MethodName: CheckEmpty
+        m_TargetAssemblyTypeName: NumberOfLight, Assembly-CSharp
+        m_MethodName: CheckNumber
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6076,9 +6075,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1481879603}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88509ae63e09e9f47befe848bf131ed5, type: 3}
+  m_Script: {fileID: 11500000, guid: 23d2ab770d7a60c458f60925afecb127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _manager: {fileID: 599610561}
 --- !u!1 &1529190871
 GameObject:
   m_ObjectHideFlags: 0

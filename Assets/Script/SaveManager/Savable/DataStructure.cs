@@ -70,7 +70,7 @@ public class GameBalance {
 
         return (distanceMedium - bounds.x) / (bounds.y - bounds.x);
     }
-    
+
     public static float ComputeBalance(List<int> data, Vector2 bounds)
     {
         float distanceMedium = 0.0f;
@@ -83,10 +83,4 @@ public class GameBalance {
 
         return (distanceMedium - bounds.x) / (bounds.y - bounds.x);
     }
-
-    public static float _pedalsDistance = 1.0f;
-    public static float _pedalsReactionTime = 1.0f;
-    public static float _pitchAndRollDistance = 1.0f;
-    public static float _pitchAndRollReactionTime = 1.0f;
-    public static float _gazAccuracy = 1.0f;
 }
