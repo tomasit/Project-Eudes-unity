@@ -13,15 +13,18 @@ public class PitchAndRoll : ASessionObject
     private PlayingArea _playingArea = null;
     private List<float> _reactionTime;
     private List<float> _accuracy;
+    private List<float> _rotationAccu;
     private Coroutine _reactionTimeCoroutine = null;
     private float _reactionTimeCounter = 0.0f;
     private float _timer = 0.0f;
-    private const float _minimumPosY = 0.07f;
+    private const float _minimumPosY = 0.5f;
+    private const float _maximumPosY = 2.2f;
 
     public void Start()
     {
         _reactionTime = new List<float>();
         _accuracy = new List<float>();
+        _rotationAccu = new List<float>();
         _playingArea = FindObjectOfType<PlayingArea>();
     }
 
@@ -36,11 +39,11 @@ public class PitchAndRoll : ASessionObject
             Random.Range(360.0f - _clampToRotation, 355.0f) : Random.Range(5.0f, _clampToRotation)));
 
         float newPos = (Random.Range(0, 2) == 1) ?
-            Random.Range(_playingArea.GetAreaBounds().y * _minimumPosY, _playingArea.GetAreaBounds().y * 0.35f) :
-            Random.Range(_playingArea.GetAreaBounds().y * -_minimumPosY, _playingArea.GetAreaBounds().y * -0.35f);
+            Random.Range(_playingArea.GetAreaPosition().y + _minimumPosY, _playingArea.GetAreaPosition().y + _maximumPosY) :
+            Random.Range(_playingArea.GetAreaPosition().y - _minimumPosY, _playingArea.GetAreaPosition().y - _maximumPosY);
 
         var position = new Vector3(
-            transform.position.x, _playingArea.GetAreaPosition().y + newPos, transform.position.z);
+            transform.position.x, newPos, transform.position.z);
 
         transform.position = position;
     }
@@ -59,16 +62,17 @@ public class PitchAndRoll : ASessionObject
         _inPause = false;
         SaveSessionData();
         _accuracy.Clear();
+        _rotationAccu.Clear();
         _reactionTime.Clear();
 
-        foreach (var tkt in SaveManager.DataInstance.GetDict()[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY])
-        {
-            Debug.Log("Percentage of accuracy : " + tkt);
-        }
-        foreach (var tkt in SaveManager.DataInstance.GetDict()[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME])
-        {
-            Debug.Log("Percentage of reactionTime : " + tkt);
-        }
+        // foreach (var tkt in SaveManager.DataInstance.GetDict()[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY])
+        // {
+        //     Debug.Log("Percentage of accuracy : " + tkt);
+        // }
+        // foreach (var tkt in SaveManager.DataInstance.GetDict()[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME])
+        // {
+        //     Debug.Log("Percentage of reactionTime : " + tkt);
+        // }
     }
 
     // This function calcul statistique from session datas.
@@ -79,8 +83,13 @@ public class PitchAndRoll : ASessionObject
     {
         SaveManager.DataInstance.GetDict()[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME].Add(1 -
             GameBalance.ComputeBalance(_reactionTime, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME)));
-        SaveManager.DataInstance.GetDict()[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY].Add(1 -
-            GameBalance.ComputeBalance(_accuracy, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY)));
+        
+
+        var distanceBalance = GameBalance.ComputeBalance(_accuracy, new Vector2(0.0f, _maximumPosY));
+        var distanceRotation = GameBalance.ComputeBalance(_rotationAccu, new Vector2(0.0f, _clampToRotation));
+        // Debug.Log("Balance distance : " + distanceBalance + " - Balance rotation : " + distanceRotation + " - Total Balance : " + (1 - (distanceBalance + distanceRotation) / 2));
+        SaveManager.DataInstance.GetDict()[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY].Add(1 - (distanceBalance + distanceRotation) / 2);
+
     }
 
     public void Move(InputAction.CallbackContext value)
@@ -91,39 +100,18 @@ public class PitchAndRoll : ASessionObject
 
     public void MoveObject()
     {
-        var tempPosition = transform.position;
         var tempRotation = transform.eulerAngles;
 
         transform.Translate(Vector3.up * ((SaveManager.DataInstance.GetParameters()._PR_MoveSpeed * Time.deltaTime) * _movement.y), Space.World);
+        var tempPosition = transform.position;
+        tempPosition.y = Mathf.Clamp(tempPosition.y, _playingArea.GetAreaPosition().y - _maximumPosY, _playingArea.GetAreaPosition().y + _maximumPosY);
+        transform.position = tempPosition;
 
         float newRotation = (SaveManager.DataInstance.GetParameters()._PR_RotationSpeed * Time.deltaTime * _movement.x);
         transform.Rotate(0.0f, 0.0f, -newRotation, Space.World);
         var rotation = transform.eulerAngles;
         rotation.z = Mathf.Clamp(rotation.z, rotation.z > 150.0f ? 360.0f - _clampToRotation : 0, rotation.z > 150.0f ? 360.0f : _clampToRotation);
         transform.eulerAngles = rotation;
-
-        // int flags = CheckCorners();
-
-        // if (((flags >> 3) & 1) == 1 && ((flags >> 7) & 1) == 1)
-        // {
-        //     transform.position = new Vector3(transform.position.x, tempPosition.y, tempPosition.z);
-        //     transform.eulerAngles = tempRotation;
-        // }
-        // if (((flags >> 4) & 1) == 1 && ((flags >> 8) & 1) == 1)
-        // {
-        //     transform.position = new Vector3(transform.position.x, tempPosition.y, tempPosition.z);
-        //     transform.eulerAngles = tempRotation;
-        // }
-        // if (((flags >> 1) & 1) == 1 && ((flags >> 5) & 1) == 1)
-        // {
-        //     transform.position = new Vector3(tempPosition.x, transform.position.y, tempPosition.z);
-        //     transform.eulerAngles = tempRotation;
-        // }
-        // if (((flags >> 2) & 1) == 1 && ((flags >> 6) & 1) == 1)
-        // {
-        //     transform.position = new Vector3(tempPosition.x, transform.position.y, tempPosition.z);
-        //     transform.eulerAngles = tempRotation;
-        // }
     }
 
     private int GetDir(Vector3 target)
@@ -139,15 +127,29 @@ public class PitchAndRoll : ASessionObject
         return dir;
     }
 
-    private IEnumerator ReactionTimeClock(float waitTime)
+    private int GetRot()
+    {
+        if (transform.eulerAngles.z < 360 && transform.eulerAngles.z >= 360 - _clampToRotation)
+            return 1;
+        else
+            return -1;
+    }
+
+    private IEnumerator ReactionTimeClock()
     {
         _reactionTimeCounter = 0.0f;
         int dir = -GetDir(_target.transform.position);
-        
+        int rot = GetRot();
         Vector3 lastPos = transform.position;
+        float moveX = _movement.x;
 
-        for (int nDir = 0; nDir != dir; nDir = GetDir(lastPos), _reactionTimeCounter += Time.deltaTime)
+        for (int nDir = 0; nDir != dir || (rot < 0 ? moveX > 0 : moveX < 0); _reactionTimeCounter += Time.deltaTime)
         {
+            if ((rot < 0 ? moveX < 0 : moveX > 0))
+                moveX = _movement.x;
+            if (nDir != dir)
+                nDir = GetDir(lastPos);
+
             lastPos.x = transform.position.x;
             yield return null;
         }
@@ -161,8 +163,12 @@ public class PitchAndRoll : ASessionObject
     private void GetAccuracy()
     {
         float distance = Vector3.Distance(transform.position, _target.transform.position);
-        distance = Mathf.Clamp(distance, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY).x, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY).y);
         _accuracy.Add(distance);
+
+        var rot = transform.eulerAngles;
+        rot.z = (rot.z >= 360 - _clampToRotation ? 360 - rot.z : rot.z);
+        float distanceRotation = Vector3.Distance(rot, Vector3.zero);
+        _rotationAccu.Add(distanceRotation);
     }
 
     private void StartClock()
@@ -173,7 +179,7 @@ public class PitchAndRoll : ASessionObject
             _reactionTimeCoroutine = null;
             _reactionTime.Add(Mathf.Clamp(_reactionTimeCounter, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME).x, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME).y));
         }
-        _reactionTimeCoroutine = StartCoroutine(ReactionTimeClock(0.01f));
+        _reactionTimeCoroutine = StartCoroutine(ReactionTimeClock());
     }
 
     private void Update()

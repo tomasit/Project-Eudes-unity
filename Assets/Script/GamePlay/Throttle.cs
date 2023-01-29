@@ -12,8 +12,9 @@ public class Throttle : ASessionObject
     private ConstructGazBar _gazBar;
     private float _accuracy;
     private float _speed = 0.0f;
+    private Vector2 _oldVelocity;
 
-    public void Start()
+    public void Awake()
     {
         _accuracy = 0.0f;
         _gazBar = FindObjectOfType<ConstructGazBar>();
@@ -23,9 +24,12 @@ public class Throttle : ASessionObject
 
     public override void StartSession()
     {
+        _oldVelocity = Vector2.zero;
         _speed = 0.0f;
         _started = true;
         _accuracy = 0.0f;
+        _gazBar.ResetArrowPosition();
+        _rgbd.velocity = Vector2.zero;
         AutoAddForce(true);
     }
 
@@ -34,6 +38,19 @@ public class Throttle : ASessionObject
         _started = false;
         _inPause = false;
         SaveSessionData();
+    }
+
+    public override bool Pause()
+    {
+        _oldVelocity = _rgbd.velocity;
+        _rgbd.velocity = Vector2.zero;
+        return base.Pause();
+    }
+
+    public override void Resume()
+    {
+        base.Resume();
+        _rgbd.velocity = _oldVelocity;
     }
 
     // This function calcul statistique from session datas.
@@ -96,7 +113,7 @@ public class Throttle : ASessionObject
         AddForceByThrottle();
 
         transform.localPosition = new Vector3(transform.localPosition.x,
-        Mathf.Clamp(transform.localPosition.y, -ScaleWithScreen.GetScreenToWorldHeight * 0.5f + _renderer.bounds.size.y * 0.5f + _gazBar._sideSize, ScaleWithScreen.GetScreenToWorldHeight * 0.5f - _renderer.bounds.size.y * 0.5f - _gazBar._sideSize),
+        Mathf.Clamp(transform.localPosition.y, -_gazBar.GetScaleY() * 0.5f + _renderer.bounds.size.y * 0.5f + _gazBar._sideSize, _gazBar.GetScaleY() * 0.5f - _renderer.bounds.size.y * 0.5f - _gazBar._sideSize),
         transform.localPosition.z);
     }
 

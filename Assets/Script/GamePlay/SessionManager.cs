@@ -10,8 +10,6 @@ public class SessionManager : MonoBehaviour
     private bool _isPaused = false;
     private float _timer = 0.0f;
 
-    public bool tkt = false;
-
     public bool IsRunning()
     {
         return _isRunning;
@@ -55,12 +53,6 @@ public class SessionManager : MonoBehaviour
 
     private void Update()
     {
-        if (tkt)
-        {
-            StartSession();
-            tkt = false;
-        }
-
         if (!CanRun())
             return;
 
