@@ -62,7 +62,7 @@ public class SaveManager : MonoBehaviour
         _statDictionary.Add(StatistiqueGraph.StatistiqueType.NUMBER_MEMORY, new List<float>());
         _statDictionary.Add(StatistiqueGraph.StatistiqueType.LIGHT_MEMORY, new List<float>());
 
-        _balance.Add(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY, new Vector2(0.0f, 2.0f));
+        _balance.Add(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY, new Vector2(1.5f, 2.0f));
         _balance.Add(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME, new Vector2(0.0f, 1.5f));
         _balance.Add(StatistiqueGraph.StatistiqueType.GAZ_ACCURACY, new Vector2(1.0f, 5.0f));
         _balance.Add(StatistiqueGraph.StatistiqueType.RUDDER_ACCURACY, new Vector2(1.0f, 5.0f));
@@ -74,6 +74,7 @@ public class SaveManager : MonoBehaviour
     public int GetNumberSession() { return _statDictionary[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY].Count; }
     public Dictionary<StatistiqueGraph.StatistiqueType, List<float>> GetDict() { return _statDictionary; }
     public Vector2 GetBalance(StatistiqueGraph.StatistiqueType balanceType) { return _balance[balanceType]; }
+    public void SetBalance(StatistiqueGraph.StatistiqueType balanceType, float low, float high) { _balance[balanceType] = new Vector2(low, high); }
     public ParametrableValues GetParameters() { return _params; }
 
     public void Load()
