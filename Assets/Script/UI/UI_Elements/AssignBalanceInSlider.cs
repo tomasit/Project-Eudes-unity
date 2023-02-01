@@ -18,36 +18,32 @@ public class AssignBalanceInSlider : MonoBehaviour
         WriteDefault();
     }
 
+    public void SetInteraction(bool interact)
+    {
+        _slider.interactable = interact;
+        _lowInput.GetComponent<TMP_InputField>().interactable = interact;
+        _highInput.GetComponent<TMP_InputField>().interactable = interact;
+    }
+
     public void WriteDefault()
     {
         if (_type == StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY)
         {
-            _slider.SetValueWithoutNotify(SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY).x, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY).y);
+            _slider.SetValueWithoutNotify(SaveManager.DataInstance.GetBalance()._pitchAndRollAccuracyMin, SaveManager.DataInstance.GetBalance()._pitchAndRollAccuracyMax);
         }
         else if (_type == StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME)
         {
-            _slider.SetValueWithoutNotify(SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME).x, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME).y);
-        }
-        else if (_type == StatistiqueGraph.StatistiqueType.GAZ_ACCURACY)
-        {
-            _slider.SetValueWithoutNotify(SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.GAZ_ACCURACY).x, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.GAZ_ACCURACY).y);
+            _slider.SetValueWithoutNotify(SaveManager.DataInstance.GetBalance()._pitchAndRollReactionTimeMin, SaveManager.DataInstance.GetBalance()._pitchAndRollReactionTimeMax);
         }
         else if (_type == StatistiqueGraph.StatistiqueType.RUDDER_ACCURACY)
         {
-            _slider.SetValueWithoutNotify(SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.RUDDER_ACCURACY).x, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.RUDDER_ACCURACY).y);
+            _slider.SetValueWithoutNotify(SaveManager.DataInstance.GetBalance()._rubberAccuracyMin, SaveManager.DataInstance.GetBalance()._rubberAccuracyMax);
         }
         else if (_type == StatistiqueGraph.StatistiqueType.RUDDER_REACTION_TIME)
         {
-            _slider.SetValueWithoutNotify(SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.RUDDER_REACTION_TIME).x, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.RUDDER_REACTION_TIME).y);
+            _slider.SetValueWithoutNotify(SaveManager.DataInstance.GetBalance()._rubberReactionTimeMin, SaveManager.DataInstance.GetBalance()._rubberReactionTimeMax);
         }
-        else if (_type == StatistiqueGraph.StatistiqueType.NUMBER_MEMORY)
-        {
-            _slider.SetValueWithoutNotify(SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.NUMBER_MEMORY).x, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.NUMBER_MEMORY).y);
-        }
-        else if (_type == StatistiqueGraph.StatistiqueType.LIGHT_MEMORY)
-        {
-            _slider.SetValueWithoutNotify(SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.LIGHT_MEMORY).x, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.LIGHT_MEMORY).y);
-        }
+
         _lowInput.SetText();
         _highInput.SetText();
     }
@@ -67,31 +63,23 @@ public class AssignBalanceInSlider : MonoBehaviour
     {
         if (_type == StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY)
         {
-            SaveManager.DataInstance.SetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_ACCURACY, low, high);
+            SaveManager.DataInstance.GetBalance()._pitchAndRollAccuracyMin = low;
+            SaveManager.DataInstance.GetBalance()._pitchAndRollAccuracyMax = high;
         }
         else if (_type == StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME)
         {
-            SaveManager.DataInstance.SetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME, low, high);
-        }
-        else if (_type == StatistiqueGraph.StatistiqueType.GAZ_ACCURACY)
-        {
-            SaveManager.DataInstance.SetBalance(StatistiqueGraph.StatistiqueType.GAZ_ACCURACY, low, high);
+            SaveManager.DataInstance.GetBalance()._pitchAndRollReactionTimeMin = low;
+            SaveManager.DataInstance.GetBalance()._pitchAndRollReactionTimeMax = high;
         }
         else if (_type == StatistiqueGraph.StatistiqueType.RUDDER_ACCURACY)
         {
-            SaveManager.DataInstance.SetBalance(StatistiqueGraph.StatistiqueType.RUDDER_ACCURACY, low, high);
+            SaveManager.DataInstance.GetBalance()._rubberAccuracyMin = low;
+            SaveManager.DataInstance.GetBalance()._rubberAccuracyMax = high;
         }
         else if (_type == StatistiqueGraph.StatistiqueType.RUDDER_REACTION_TIME)
         {
-            SaveManager.DataInstance.SetBalance(StatistiqueGraph.StatistiqueType.RUDDER_REACTION_TIME, low, high);
-        }
-        else if (_type == StatistiqueGraph.StatistiqueType.NUMBER_MEMORY)
-        {
-            SaveManager.DataInstance.SetBalance(StatistiqueGraph.StatistiqueType.NUMBER_MEMORY, low, high);
-        }
-        else if (_type == StatistiqueGraph.StatistiqueType.LIGHT_MEMORY)
-        {
-            SaveManager.DataInstance.SetBalance(StatistiqueGraph.StatistiqueType.LIGHT_MEMORY, low, high);
+            SaveManager.DataInstance.GetBalance()._rubberReactionTimeMin = low;
+            SaveManager.DataInstance.GetBalance()._rubberReactionTimeMax = high;
         }
     }
 }

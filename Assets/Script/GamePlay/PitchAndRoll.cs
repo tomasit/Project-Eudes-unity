@@ -82,7 +82,7 @@ public class PitchAndRoll : ASessionObject
     public override void SaveSessionData()
     {
         SaveManager.DataInstance.GetDict()[StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME].Add(1 -
-            GameBalance.ComputeBalance(_reactionTime, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME)));
+            GameBalance.ComputeBalance(_reactionTime, new Vector2(SaveManager.DataInstance.GetBalance()._pitchAndRollReactionTimeMin, SaveManager.DataInstance.GetBalance()._pitchAndRollReactionTimeMax)));
         
 
         var distanceBalance = GameBalance.ComputeBalance(_accuracy, new Vector2(0.0f, _maximumPosY));
@@ -155,7 +155,7 @@ public class PitchAndRoll : ASessionObject
         }
 
         // clamp between balance values
-        float r = Mathf.Clamp(_reactionTimeCounter, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME).x, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME).y);
+        float r = Mathf.Clamp(_reactionTimeCounter,SaveManager.DataInstance.GetBalance()._pitchAndRollReactionTimeMin, SaveManager.DataInstance.GetBalance()._pitchAndRollReactionTimeMax);
         _reactionTime.Add(r);
         _reactionTimeCoroutine = null;
     }
@@ -177,7 +177,7 @@ public class PitchAndRoll : ASessionObject
         {
             StopCoroutine(_reactionTimeCoroutine);
             _reactionTimeCoroutine = null;
-            _reactionTime.Add(Mathf.Clamp(_reactionTimeCounter, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME).x, SaveManager.DataInstance.GetBalance(StatistiqueGraph.StatistiqueType.PITCH_AND_ROLL_REACTION_TIME).y));
+            _reactionTime.Add(Mathf.Clamp(_reactionTimeCounter, SaveManager.DataInstance.GetBalance()._pitchAndRollReactionTimeMin, SaveManager.DataInstance.GetBalance()._pitchAndRollReactionTimeMax));
         }
         _reactionTimeCoroutine = StartCoroutine(ReactionTimeClock());
     }

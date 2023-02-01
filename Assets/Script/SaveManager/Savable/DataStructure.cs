@@ -15,6 +15,36 @@ public enum ParametrableValuesEnum
 }
 
 [System.Serializable]
+public class BalanceValues
+{
+    public BalanceValues() {}
+    
+    public BalanceValues(BalanceValues other)
+    {
+        _pitchAndRollAccuracyMin = other._pitchAndRollAccuracyMin;
+        _pitchAndRollAccuracyMax = other._pitchAndRollAccuracyMax;
+        _pitchAndRollReactionTimeMin = other._pitchAndRollReactionTimeMin;
+        _pitchAndRollReactionTimeMax = other._pitchAndRollReactionTimeMax;
+
+        _rubberAccuracyMin = other._rubberAccuracyMin;
+        _rubberAccuracyMax = other._rubberAccuracyMax;
+        _rubberReactionTimeMin = other._rubberReactionTimeMin;
+        _rubberReactionTimeMax = other._rubberReactionTimeMax;
+
+    }
+
+    public float _pitchAndRollAccuracyMin = 1.5f;
+    public float _pitchAndRollAccuracyMax = 2.2f;
+    public float _pitchAndRollReactionTimeMin = 0.0f;
+    public float _pitchAndRollReactionTimeMax = 1.5f;
+
+    public float _rubberAccuracyMin = 1.0f;
+    public float _rubberAccuracyMax = 5.0f;
+    public float _rubberReactionTimeMin = 0.3f;
+    public float _rubberReactionTimeMax = 2.0f;
+}
+
+[System.Serializable]
 public class ParametrableValues
 {
     public ParametrableValues() {}

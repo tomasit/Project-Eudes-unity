@@ -8,7 +8,8 @@ public class FitWithWorldSize : MonoBehaviour
 
     public void RescaleCamera()
     {
-        FitLevelSize(_sprite.bounds.size.x, _sprite.bounds.size.y);   
+        if (_sprite != null)
+            FitLevelSize(_sprite.bounds.size.x, _sprite.bounds.size.y);   
     }
 
     private void FitLevelSize(float width, float height)

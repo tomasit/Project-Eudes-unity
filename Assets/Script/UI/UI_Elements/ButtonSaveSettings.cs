@@ -16,14 +16,14 @@ public class ButtonSaveSettings : MonoBehaviour
     {
         SaveManager.DataInstance.SaveParameters();
         DestroyThis();
-        ViewManager.ShowLast();
+        ViewManager.Show<MainMenuView>();
     }
 
     public void DontSaveSettings()
     {
         FindObjectOfType<ParameterView>(true).RestoreOldParameters();
         DestroyThis();
-        ViewManager.ShowLast();
+        ViewManager.Show<MainMenuView>();
     }
 
     public void DestroyThis()

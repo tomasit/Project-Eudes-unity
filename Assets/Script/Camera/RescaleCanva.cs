@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class RescaleCanva : MonoBehaviour
 {
+    [SerializeField] private Camera _camera;
+
     private void OnRectTransformDimensionsChange()
     {
-        Camera.main.GetComponent<FitWithWorldSize>().RescaleCamera();
+        if (_camera != null)
+            _camera.GetComponent<FitWithWorldSize>().RescaleCamera();
     }
 }
